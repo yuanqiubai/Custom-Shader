@@ -1,13 +1,77 @@
 # Custom-Shader
 
-A collection of custom shaders, Shader Graphs and reusable Sub Graphs for Unity URP.
+**English** · [中文](README.zh-CN.md)
+
+A collection of custom shaders, Shader Graphs and reusable Sub Graphs for Unity's
+Universal Render Pipeline (URP), aimed at a stylized / anime (Ghibli-like) look for
+characters, grass, terrain and VFX.
+
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Contents](#contents)
+  - [Hand-written Shaders](#hand-written-shaders)
+  - [Shader Graphs](#shader-graphs)
+  - [Sub Graphs](#sub-graphs)
+  - [HLSL Custom Nodes](#hlsl-custom-nodes)
+  - [Third-party](#third-party)
+- [Usage](#usage)
+- [Notes](#notes)
+
+## Requirements
+
+- Unity 6.1 (6000.1) or newer
+- Universal Render Pipeline (URP) 17.1+
 
 ## Contents
 
-- `Anime.shader`, `My_Toon.shader`, `AnimeGrass_2.shader` — hand-written shaders
-- `_Toon.shadergraph`, `Cloudy_ShaderGraph.shadergraph`, `VFX/Trail.shadergraph` — main shader graphs
-- `Grass/` — Ghibli style grass shader graphs
-- `SubGraphs/` — reusable sub graphs
-- `HLSL/` — HLSL utility and custom node libraries
-- `ThirdParty/` — third-party packages
+### Hand-written Shaders
 
+| Shader | Path | Description |
+| --- | --- | --- |
+| `Custom/Anime` | `Anime.shader` | Full anime character shader: gradient ramp diffuse, multi-step shadow with adjustable threshold and smoothness, three specular shapes (circle / star / cross / custom) with a specular mask, rim light, hair highlight, ambient control and alpha cutout. Ships with a dedicated outline pass and a shadow caster pass. |
+| `Custom/My_Toon` | `My_Toon.shader` | Compact URP toon shader driven by a single ramp texture. A good starting point for a custom toon look. |
+| `Custom/AnimeGrass` | `AnimeGrass_2.shader` | Alpha cutout anime grass shader with two gradient maps blended by a lerp factor. |
+
+### Shader Graphs
+
+| Graph | Path | Description |
+| --- | --- | --- |
+| Toon | `_Toon.shadergraph` | Toon shading graph built on top of the reusable sub graphs. |
+| Cloudy | `Cloudy_ShaderGraph.shadergraph` | Stylized cloudy sky shading. |
+| Trail | `VFX/Trail.shadergraph` | Stylized trail effect for VFX. |
+| Grass v0 | `Grass/First_GhibliStyle_Grass_ShaderGraph.shadergraph` | First Ghibli style grass iteration. |
+| Grass v1 | `Grass/GhibliStyle_Grass_v1_ShaderGraph.shadergraph` | Second Ghibli style grass iteration. |
+| Grass LOD0 v2 | `Grass/GhibliStyleGrass_LOD0_v2_ShaderGraph.shadergraph` | Third iteration, optimized LOD0 variant. |
+
+### Sub Graphs
+
+Reusable nodes in `SubGraphs/`, grouped by purpose:
+
+- **Shading** — `Sub_BaseColor`, `Sub_HalfLambert`, `Sub_BlinnPhong`, `Sub_ToonRemapGradient`
+- **Billboard** — `Sub_Billboard`, `Sub_BillboardBase`
+- **Vegetation wind** — `Sub_CalculateYWeightedOffset` with `Quadratic`, `Sine` and `Smoothstep` variants
+- **Terrain blending** — `Sub_CalculateTerrainUV`, `Sub_CalculateTerrainColor`
+- **Color correction** — `Sub_ElevateBlack`
+
+### HLSL Custom Nodes
+
+| File | Nodes |
+| --- | --- |
+| `HLSL/ToolNode.hlsl` | `BillboardBase`, `Billboard`, `CalculateYWeightedOffset` (plus `Quadratic` / `Sine` / `Smoothstep`), `CalculateTerrainUV`, `CalculateTerrainColor` |
+| `HLSL/ColorCorrection.hlsl` | `ElevateBlack` — lifts and blends the dark parts of a color |
+
+### Third-party
+
+- `ThirdParty/URP_ShaderGraphCustomLighting-6000.1` — Cyanilux's *Shader Graph / URP Custom Lighting* package (`com.cyanilux.shadergraph-customlighting` v17.1.0, for URP 17.1+ / Unity 6000.1+). Provides custom lighting sub graphs for main light, additional lights, shadows, cookie, fog, shadowmask and subtractive GI, together with toon and shadow receiver examples. Distributed under the MIT license, see the `LICENSE` file inside the folder.
+
+## Usage
+
+1. Copy the folders you need into your project's `Assets/` directory.
+2. Make sure the Universal Render Pipeline is active and the render pipeline asset is assigned in `Project Settings → Graphics`.
+3. The HLSL files are meant to be used through Shader Graph's `Custom Function` node with `Source` set to `HLSL File`, so the file must live inside the project.
+4. When using the third-party lighting sub graphs, follow the setup notes in `ThirdParty/URP_ShaderGraphCustomLighting-6000.1/README.md`.
+
+## Notes
+
+- `.meta` files are not tracked in this repository (`*.meta` in `.gitignore`). Unity regenerates them on import, so asset GUIDs are assigned per project — copy the files you need rather than referencing them across projects.
