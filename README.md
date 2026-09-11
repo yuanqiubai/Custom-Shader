@@ -15,6 +15,7 @@ characters, grass, terrain and VFX.
   - [Sub Graphs](#sub-graphs)
   - [HLSL Custom Nodes](#hlsl-custom-nodes)
   - [Third-party](#third-party)
+    - [URP ShaderGraph Custom Lighting](#urp-shadergraph-custom-lighting)
 - [Usage](#usage)
 - [Notes](#notes)
 
@@ -63,7 +64,14 @@ Reusable nodes in `SubGraphs/`, grouped by purpose:
 
 ### Third-party
 
-- `ThirdParty/URP_ShaderGraphCustomLighting-6000.1` — Cyanilux's *Shader Graph / URP Custom Lighting* package (`com.cyanilux.shadergraph-customlighting` v17.1.0, for URP 17.1+ / Unity 6000.1+). Provides custom lighting sub graphs for main light, additional lights, shadows, cookie, fog, shadowmask and subtractive GI, together with toon and shadow receiver examples. Distributed under the MIT license, see the `LICENSE` file inside the folder.
+#### URP ShaderGraph Custom Lighting
+
+- **Download**: <https://github.com/Cyanilux/URP_ShaderGraphCustomLighting>
+- **Install via Git URL**: `https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git`
+- **Author**: Cyanilux — <https://www.cyanilux.com/>
+- **Package**: `com.cyanilux.shadergraph-customlighting` v17.1.0 (URP 17.1+ / Unity 6000.1+)
+- **Local copy**: `ThirdParty/URP_ShaderGraphCustomLighting-6000.1` — custom lighting sub graphs for main light, additional lights, shadows, cookie, fog, shadowmask and subtractive GI, plus toon and shadow receiver examples
+- **License**: MIT, see the `LICENSE` file inside the folder
 
 ## Usage
 

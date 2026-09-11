@@ -14,6 +14,7 @@
   - [Sub Graph](#sub-graph)
   - [HLSL 自定义节点](#hlsl-自定义节点)
   - [第三方资源](#第三方资源)
+    - [URP ShaderGraph Custom Lighting](#urp-shadergraph-custom-lighting)
 - [使用方式](#使用方式)
 - [说明](#说明)
 
@@ -62,10 +63,14 @@
 
 ### 第三方资源
 
-- `ThirdParty/URP_ShaderGraphCustomLighting-6000.1` —— Cyanilux 的 *Shader Graph / URP Custom Lighting*
-  包（`com.cyanilux.shadergraph-customlighting` v17.1.0，适用于 URP 17.1+ / Unity 6000.1+），
-  提供主光、附加光、阴影、Cookie、雾、Shadowmask、Subtractive GI 等自定义光照 Sub Graph，
-  以及 Toon 与 Shadow Receiver 示例。基于 MIT 协议，详见该目录内的 `LICENSE` 文件。
+#### URP ShaderGraph Custom Lighting
+
+- **下载地址**：<https://github.com/Cyanilux/URP_ShaderGraphCustomLighting>
+- **Git URL 安装**：`https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git`
+- **作者**：Cyanilux —— <https://www.cyanilux.com/>
+- **包名**：`com.cyanilux.shadergraph-customlighting` v17.1.0（URP 17.1+ / Unity 6000.1+）
+- **本地副本**：`ThirdParty/URP_ShaderGraphCustomLighting-6000.1` —— 提供主光、附加光、阴影、Cookie、雾、Shadowmask、Subtractive GI 等自定义光照 Sub Graph，以及 Toon 与 Shadow Receiver 示例
+- **协议**：MIT，详见该目录内的 `LICENSE` 文件
 
 ## 使用方式
 
