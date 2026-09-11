@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the README first / 先看 README
+    url: https://github.com/yuanqiubai/Custom-Shader/blob/main/README.md
+    about: Requirements, setup steps and usage notes / 环境要求、使用步骤与说明
+
+  - name: Third-party lighting package (Cyanilux) / 第三方光照包
+    url: https://github.com/Cyanilux/URP_ShaderGraphCustomLighting
+    about: Issues caused by the bundled third-party package belong upstream / 第三方包导致的问题请提到上游

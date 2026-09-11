@@ -17,6 +17,7 @@ characters, grass, terrain and VFX.
   - [Third-party](#third-party)
     - [URP ShaderGraph Custom Lighting](#urp-shadergraph-custom-lighting)
 - [Usage](#usage)
+- [Contributing](#contributing)
 - [Notes](#notes)
 
 ## Requirements
@@ -79,6 +80,15 @@ Reusable nodes in `SubGraphs/`, grouped by purpose:
 2. Make sure the Universal Render Pipeline is active and the render pipeline asset is assigned in `Project Settings → Graphics`.
 3. The HLSL files are meant to be used through Shader Graph's `Custom Function` node with `Source` set to `HLSL File`, so the file must live inside the project.
 4. When using the third-party lighting sub graphs, follow the setup notes in `ThirdParty/URP_ShaderGraphCustomLighting-6000.1/README.md`.
+
+## Contributing
+
+Bug reports, feature requests and pull requests are all welcome. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the commit message format, branch naming
+and the Shader Graph ground rules.
+
+If you are not sure whether something belongs here, open an issue and ask — a
+question is cheaper than a rejected pull request.
 
 ## Notes
 

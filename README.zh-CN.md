@@ -16,6 +16,7 @@
   - [第三方资源](#第三方资源)
     - [URP ShaderGraph Custom Lighting](#urp-shadergraph-custom-lighting)
 - [使用方式](#使用方式)
+- [参与贡献](#参与贡献)
 - [说明](#说明)
 
 ## 环境要求
@@ -78,6 +79,13 @@
 2. 确认工程已启用 URP，并在 `Project Settings → Graphics` 中指定渲染管线资源。
 3. HLSL 文件需配合 Shader Graph 的 `Custom Function` 节点使用，把 `Source` 设为 `HLSL File`，因此文件必须放在工程内。
 4. 使用第三方光照 Sub Graph 时，请参考 `ThirdParty/URP_ShaderGraphCustomLighting-6000.1/README.md` 中的安装说明与已知问题。
+
+## 参与贡献
+
+欢迎提交 Bug 报告、功能建议与 Pull Request。Commit 信息规范、分支命名以及 Shader Graph
+的注意事项都写在 [CONTRIBUTING.zh-CN.md](CONTRIBUTING.zh-CN.md) 里。
+
+不确定某个东西是否适合放进这个仓库？直接开个 issue 问就好 —— 提问的成本比 PR 被打回低得多。
 
 ## 说明
 
