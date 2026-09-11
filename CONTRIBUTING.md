@@ -76,7 +76,7 @@ Follow the [commit message format](#commit-message-format) below. Commits like
 
 ### 4. Open a pull request
 
-Fill in the pull request template. A good pull request includes:
+A good pull request includes:
 
 - **What changed** and **why**.
 - **Before / after screenshots or a short video** for anything visual. This is
