@@ -18,6 +18,7 @@ characters, grass, terrain and VFX.
     - [URP ShaderGraph Custom Lighting](#urp-shadergraph-custom-lighting)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [License](#license)
 - [Notes](#notes)
 
 ## Requirements
@@ -89,6 +90,11 @@ and the Shader Graph ground rules.
 
 If you are not sure whether something belongs here, open an issue and ask — a
 question is cheaper than a rejected pull request.
+
+## License
+
+MIT — see [LICENSE](LICENSE). You are free to use, modify and redistribute
+these shaders, including commercially, as long as the copyright notice is kept.
 
 ## Notes
 

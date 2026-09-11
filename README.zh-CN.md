@@ -17,6 +17,7 @@
     - [URP ShaderGraph Custom Lighting](#urp-shadergraph-custom-lighting)
 - [使用方式](#使用方式)
 - [参与贡献](#参与贡献)
+- [授权协议](#授权协议)
 - [说明](#说明)
 
 ## 环境要求
@@ -86,6 +87,11 @@
 的注意事项都写在 [CONTRIBUTING.zh-CN.md](CONTRIBUTING.zh-CN.md) 里。
 
 不确定某个东西是否适合放进这个仓库？直接开个 issue 问就好 —— 提问的成本比 PR 被打回低得多。
+
+## 授权协议
+
+MIT —— 详见 [LICENSE](LICENSE)。你可以自由使用、修改与再分发这些 Shader（含商业用途），
+只要保留版权声明即可。
 
 ## 说明
 

@@ -87,6 +87,9 @@ Fill in the pull request template. A good pull request includes:
 Small pull requests get merged quickly. Large ones that mix refactoring with new
 features tend to stall.
 
+By opening a pull request you agree that your contribution is licensed under the
+repository's [MIT license](LICENSE), same as the rest of the project.
+
 ## Commit message format
 
 ```
