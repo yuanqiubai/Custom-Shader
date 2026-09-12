@@ -4,7 +4,7 @@
 
 A collection of custom shaders, Shader Graphs and reusable Sub Graphs for Unity's
 Universal Render Pipeline (URP), aimed at a stylized / anime (Ghibli-like) look for
-characters, grass, terrain and VFX.
+characters, grass, flowers, terrain and VFX.
 
 ## Table of Contents
 
@@ -45,7 +45,8 @@ characters, grass, terrain and VFX.
 | Trail | `VFX/Trail.shadergraph` | Stylized trail effect for VFX. |
 | Grass v0 | `Grass/First_GhibliStyle_Grass_ShaderGraph.shadergraph` | First Ghibli style grass iteration. |
 | Grass v1 | `Grass/GhibliStyle_Grass_v1_ShaderGraph.shadergraph` | Second Ghibli style grass iteration. |
-| Grass LOD0 v2 | `Grass/GhibliStyleGrass_LOD0_v2_ShaderGraph.shadergraph` | Third iteration, optimized LOD0 variant. |
+| Grass LOD0 v2 | `Grass/GhibliStyleGrass_v2_LOD0_ShaderGraph.shadergraph` | Third iteration, optimized LOD0 variant. |
+| Flower LOD0 | `Flower/GhibliStyleFlower_LOD0_ShaderGraph.shadergraph` | Ghibli style flower, optimized LOD0 variant. |
 
 ### Sub Graphs
 
@@ -55,13 +56,14 @@ Reusable nodes in `SubGraphs/`, grouped by purpose:
 - **Billboard** — `Sub_Billboard`, `Sub_BillboardBase`
 - **Vegetation wind** — `Sub_CalculateYWeightedOffset` with `Quadratic`, `Sine` and `Smoothstep` variants
 - **Terrain blending** — `Sub_CalculateTerrainUV`, `Sub_CalculateTerrainColor`
+- **Root shadow** — `Sub_RootShadowOS`, object-space root shadow mask for meshes whose UVs do not expand along the height axis
 - **Color correction** — `Sub_ElevateBlack`
 
 ### HLSL Custom Nodes
 
 | File | Nodes |
 | --- | --- |
-| `HLSL/ToolNode.hlsl` | `BillboardBase`, `Billboard`, `CalculateYWeightedOffset` (plus `Quadratic` / `Sine` / `Smoothstep`), `CalculateTerrainUV`, `CalculateTerrainColor` |
+| `HLSL/ToolNode.hlsl` | `BillboardBase`, `Billboard`, `CalculateYWeightedOffset` (plus `Quadratic` / `Sine` / `Smoothstep`), `CalculateTerrainUV`, `CalculateTerrainColor`, `RootShadowOS` |
 | `HLSL/ColorCorrection.hlsl` | `ElevateBlack` — lifts and blends the dark parts of a color |
 
 ### Third-party

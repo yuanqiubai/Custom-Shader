@@ -267,4 +267,30 @@ void CalculateTerrainColor_half(half4 controlMap_1, half4 controlMap_2,
     finalColor = color_0 + color_1 + color_2 + color_3 + color_4 + color_5 + color_6 + color_7;
 }
 
+// --------------------------------- 根阴影物体空间 ------------------------------------
+// 针对不是按照高度方向展开的UV
+// 参数:
+// positionOS: 模型空间下的顶点位置
+// rootHeight: 根阴影的高度范围
+// fadeHeight: 根阴影的渐变高度范围
+// strength: 根阴影的强度
+void RootShadowOS_float(float3 positionOS, float3 normalOS, float rootHeight, float fadeHeight, float strength, out float mask)
+{
+    float rootMask = 1.0 - smoothstep(rootHeight, rootHeight + fadeHeight, positionOS.y);
+    float groundFacing = saturate(-normalOS.y);
+    
+    rootMask *= lerp(0.5, 1.0, groundFacing);
+    
+    mask = saturate(rootMask * strength);
+}
+
+void RootShadowOS_half(half3 positionOS, half3 normalOS, half rootHeight, half fadeHeight, half strength, out half mask)
+{
+    half rootMask = 1.0 - smoothstep(rootHeight, rootHeight + fadeHeight, positionOS.y);
+    half groundFacing = saturate(-normalOS.y);
+
+    rootMask *= lerp(0.5, 1.0, groundFacing);
+
+    mask = saturate(rootMask * strength);
+}
 #endif

@@ -3,7 +3,7 @@
 [English](README.md) · **中文**
 
 一套面向 Unity **URP（通用渲染管线）** 的自定义 Shader、Shader Graph 与可复用 Sub Graph 合集，
-主要用于角色、草地、地形与特效的**风格化 / 动漫（吉卜力风）**渲染。
+主要用于角色、草地、花卉、地形与特效的**风格化 / 动漫（吉卜力风）**渲染。
 
 ## 目录
 
@@ -44,7 +44,8 @@
 | Trail | `VFX/Trail.shadergraph` | 特效用的风格化拖尾。 |
 | 草地 v0 | `Grass/First_GhibliStyle_Grass_ShaderGraph.shadergraph` | 吉卜力风格草地的第一个版本。 |
 | 草地 v1 | `Grass/GhibliStyle_Grass_v1_ShaderGraph.shadergraph` | 吉卜力风格草地的第二个版本。 |
-| 草地 LOD0 v2 | `Grass/GhibliStyleGrass_LOD0_v2_ShaderGraph.shadergraph` | 第三个版本，LOD0 优化变体。 |
+| 草地 LOD0 v2 | `Grass/GhibliStyleGrass_v2_LOD0_ShaderGraph.shadergraph` | 第三个版本，LOD0 优化变体。 |
+| 花卉 LOD0 | `Flower/GhibliStyleFlower_LOD0_ShaderGraph.shadergraph` | 吉卜力风格花卉，LOD0 优化变体。 |
 
 ### Sub Graph
 
@@ -54,13 +55,14 @@
 - **广告牌** —— `Sub_Billboard`、`Sub_BillboardBase`
 - **植被风动** —— `Sub_CalculateYWeightedOffset` 及其 `Quadratic`、`Sine`、`Smoothstep` 变体
 - **地形混合** —— `Sub_CalculateTerrainUV`、`Sub_CalculateTerrainColor`
+- **根部阴影** —— `Sub_RootShadowOS`，适用于 UV 不沿高度轴展开的模型的物体空间根部阴影遮罩
 - **颜色校正** —— `Sub_ElevateBlack`
 
 ### HLSL 自定义节点
 
 | 文件 | 节点 |
 | --- | --- |
-| `HLSL/ToolNode.hlsl` | `BillboardBase`、`Billboard`、`CalculateYWeightedOffset`（含 `Quadratic` / `Sine` / `Smoothstep`）、`CalculateTerrainUV`、`CalculateTerrainColor` |
+| `HLSL/ToolNode.hlsl` | `BillboardBase`、`Billboard`、`CalculateYWeightedOffset`（含 `Quadratic` / `Sine` / `Smoothstep`）、`CalculateTerrainUV`、`CalculateTerrainColor`、`RootShadowOS` |
 | `HLSL/ColorCorrection.hlsl` | `ElevateBlack` —— 抬升并混合颜色的暗部 |
 
 ### 第三方资源
