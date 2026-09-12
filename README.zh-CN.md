@@ -5,8 +5,15 @@
 一套面向 Unity **URP（通用渲染管线）** 的自定义 Shader、Shader Graph 与可复用 Sub Graph 合集，
 主要用于角色、草地、花卉、地形与特效的**风格化 / 动漫（吉卜力风）**渲染。
 
+## 效果展示
+
+完全使用本仓库 Shader 渲染的吉卜力风格草地（Unity 6 + URP）。
+
+https://github.com/user-attachments/assets/04ca7c45-6870-478f-b2e2-1bb0944da2bc
+
 ## 目录
 
+- [效果展示](#效果展示)
 - [环境要求](#环境要求)
 - [内容一览](#内容一览)
   - [手写 Shader](#手写-shader)

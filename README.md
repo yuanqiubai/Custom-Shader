@@ -6,8 +6,16 @@ A collection of custom shaders, Shader Graphs and reusable Sub Graphs for Unity'
 Universal Render Pipeline (URP), aimed at a stylized / anime (Ghibli-like) look for
 characters, grass, flowers, terrain and VFX.
 
+## Demo
+
+Ghibli-style grass field rendered entirely with the shaders in this repository
+(Unity 6 + URP).
+
+https://github.com/user-attachments/assets/04ca7c45-6870-478f-b2e2-1bb0944da2bc
+
 ## Table of Contents
 
+- [Demo](#demo)
 - [Requirements](#requirements)
 - [Contents](#contents)
   - [Hand-written Shaders](#hand-written-shaders)
