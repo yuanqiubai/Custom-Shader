@@ -1,0 +1,133 @@
+name: Bug report
+description: Report a broken shader, a rendering artifact or a Shader Graph error
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this! / 感谢反馈问题！
+
+        Please make sure you are on **Unity 6.1 (6000.1)+** with **URP 17.1+**, and that you have read the [README](https://github.com/yuanqiubai/Custom-Shader#readme) first.
+        请确认你使用的是 **Unity 6.1 (6000.1)+** 与 **URP 17.1+**，并已阅读 README。
+
+  - type: dropdown
+    id: asset
+    attributes:
+      label: Affected asset / 受影响的资源
+      description: Where does the problem come from? / 问题出在哪里？
+      options:
+        - Anime.shader
+        - My_Toon.shader
+        - AnimeGrass_2.shader
+        - Shader Graph (_Toon / Cloudy / Grass / VFX Trail)
+        - Sub Graph (SubGraphs/)
+        - HLSL custom node (HLSL/)
+        - ThirdParty/URP_ShaderGraphCustomLighting-6000.1
+        - Other / not sure (describe below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened? / 问题描述
+      description: A clear and concise description of the bug. / 清晰描述问题现象。
+      placeholder: e.g. The outline pass flickers on thin geometry when the camera moves.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 期望结果
+      description: What did you expect to see instead? / 你期望看到什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce / 复现步骤
+      description: How can this be reproduced reliably? / 如何稳定复现？
+      placeholder: |
+        1. Copy Anime.shader and its ramps into a clean project
+        2. Assign to a mesh with ...
+        3. Move the camera ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshots / video / 截图或视频
+      description: Drag and drop files here. Rendering issues are almost impossible to diagnose without them. / 直接拖拽文件到此处。渲染问题没有图基本无法定位。
+    validations:
+      required: false
+
+  - type: input
+    id: unity-version
+    attributes:
+      label: Unity version / Unity 版本
+      placeholder: e.g. 6000.1.12f1
+    validations:
+      required: true
+
+  - type: input
+    id: urp-version
+    attributes:
+      label: URP package version / URP 包版本
+      placeholder: e.g. 17.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform & graphics API / 平台与图形 API
+      options:
+        - Windows / DirectX 11
+        - Windows / DirectX 12
+        - Windows / Vulkan
+        - macOS / Metal
+        - Linux / Vulkan
+        - Android / Vulkan
+        - Android / OpenGL ES 3
+        - iOS / Metal
+        - WebGL
+        - Other (describe below)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: renderer
+    attributes:
+      label: URP renderer / URP 渲染路径
+      options:
+        - Forward
+        - Forward+
+        - Deferred
+        - Not sure / 不确定
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console errors / 控制台报错
+      description: Paste any related error or warning from the Unity Console. / 粘贴 Unity 控制台中的相关报错或警告。
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before submitting / 提交前确认
+      options:
+        - label: I have searched the existing issues and this is not a duplicate. / 我已搜索过已有 issue，没有重复。
+          required: true
+        - label: I am using Unity 6.1+ with URP 17.1+. / 我使用的版本符合要求。
+          required: true
+        - label: I have attached a screenshot or video (if the problem is visual). / 若为视觉问题，我已附上截图或视频。
+          required: false

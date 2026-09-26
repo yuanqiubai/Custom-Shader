@@ -1,0 +1,63 @@
+name: Feature request
+description: Suggest a new shader, a new sub graph, or an improvement to an existing one
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing your idea! / 感谢提出想法！
+
+        Please describe the **use case** rather than just the asset you want — it makes the request much easier to act on.
+        请尽量说明 **使用场景**，而不只是「我想要一个 X」，这样更容易落地。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do? / 你想解决什么问题？
+      description: Describe the situation in your project that this feature would solve. / 描述你项目里的实际场景。
+      placeholder: |
+        e.g. I am building a 2.5D platformer and need grass that flattens when the
+        player walks through it, then springs back over about a second.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution / 期望的方案
+      description: How do you imagine it working? Reference material or screenshots from other games are very welcome. / 你希望它怎么工作？非常欢迎贴参考图或其他游戏的效果。
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of contribution is this? / 属于哪一类？
+      options:
+        - New hand-written shader
+        - New Shader Graph
+        - New Sub Graph / HLSL custom node
+        - Improvement to an existing shader
+        - Documentation / README
+        - Other (describe below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered / 考虑过的替代方案
+      description: Anything you already tried, and why it did not work out. / 你试过什么、为什么不满意。
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: willing
+    attributes:
+      label: Contribution / 贡献意愿
+      options:
+        - label: I am willing to open a pull request for this. / 我愿意自己提 PR 实现它。
+          required: false
+        - label: I have searched the existing issues and this is not a duplicate. / 我已搜索过已有 issue，没有重复。
+          required: true
