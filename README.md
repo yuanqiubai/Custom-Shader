@@ -4,7 +4,7 @@
 
 A collection of custom shaders, Shader Graphs and reusable Sub Graphs for Unity's
 Universal Render Pipeline (URP), aimed at a stylized / anime (Ghibli-like) look for
-characters, grass, flowers, terrain and VFX.
+characters, grass, flowers, terrain, VFX and full-screen volumetric fog.
 
 ## Demo
 
@@ -42,6 +42,7 @@ https://github.com/user-attachments/assets/04ca7c45-6870-478f-b2e2-1bb0944da2bc
 | --- | --- | --- |
 | `Custom/Anime` | `Anime.shader` | Full anime character shader: gradient ramp diffuse, multi-step shadow with adjustable threshold and smoothness, three specular shapes (circle / star / cross / custom) with a specular mask, rim light, hair highlight, ambient control and alpha cutout. Ships with a dedicated outline pass and a shadow caster pass. |
 | `Custom/AnimeGrass` | `AnimeGrass_2.shader` | Alpha cutout anime grass shader with two gradient maps blended by a lerp factor. |
+| `Custom/VolumeFog` | `FullScreen/VolumeFog.shader` | Full-screen pass scaffold: fullscreen-triangle vertex stage, `ZTest Always` / `ZWrite Off`, URP `Opaque` render type. The fragment currently outputs UV only, so the fog logic is not hooked up yet — see the Fog graph and `HLSL/VolumetricScattering.hlsl`. |
 
 ### Shader Graphs
 
@@ -51,9 +52,11 @@ https://github.com/user-attachments/assets/04ca7c45-6870-478f-b2e2-1bb0944da2bc
 | Cloudy | `Cloudy_ShaderGraph.shadergraph` | Stylized cloudy sky shading. |
 | Trail | `VFX/FX_Trail.shadergraph` | Stylized trail effect for VFX. |
 | Clash | `VFX/FX_Clash.shadergraph` | Clash impact effect: noise-jittered UV distortion with alpha clip. |
+| Full-screen Fog | `FullScreen/Fog_ShaderGraph.shadergraph` | Full-screen volumetric fog, assembled from `Sub_Fog`, `Sub_HeightVolumeFog` and `Sub_ReconstructWorldPosition` (309 nodes). |
 | Cloudy v2 | `Cloudy_v2_ShaderGraph.shadergraph` | Cloudy sky rebuilt on layered Voronoi noise with dual scale and smoothness controls. |
+| Cloudy v3 | `Cloudy_v3_ShaderGraph.shadergraph` | Third cloudy sky iteration, layered with `Sub_Move`, `Sub_ConstructNormal`, `Sub_ElevateBlack` and `Main Light`. |
 | Grass v0 | `Grass/First_GhibliStyle_Grass_ShaderGraph.shadergraph` | First Ghibli style grass iteration. |
-| Grass v1 | `Grass/GhibliStyle_Grass_v1_ShaderGraph.shadergraph` | Second Ghibli style grass iteration. |
+| Grass v1 | `Grass/GhibliStyleGrass_v1__ShaderGraph.shadergraph` | Second Ghibli style grass iteration. |
 | Grass LOD0 v2 | `Grass/GhibliStyleGrass_v2_LOD0_ShaderGraph.shadergraph` | Third iteration, optimized LOD0 variant. |
 | Flower LOD0 | `Flower/GhibliStyleFlower_LOD0_ShaderGraph.shadergraph` | Ghibli style flower, optimized LOD0 variant. |
 | Tree LOD0 | `Tree/Tree_LOD0_ShaderGraph.shadergraph` | LOD0 tree graph assembled from the half lambert and object-space root shadow sub graphs. |
@@ -63,11 +66,14 @@ https://github.com/user-attachments/assets/04ca7c45-6870-478f-b2e2-1bb0944da2bc
 
 Reusable nodes in `SubGraphs/`, grouped by purpose:
 
-- **Shading** — `Sub_BaseColor`, `Sub_HalfLambert`, `Sub_HalfLambertBoth`, `Sub_BlinnPhong`, `Sub_ToonRemapGradient`
+- **Shading** — `Sub_BaseColor`, `Sub_HalfLambert`, `Sub_HalfLambertBoth`, `Sub_BlinnPhong`, `Sub_ToonRemapGradient`, and `Sub_DirectLightingStylized` (stylized direct light with specular colour / normal / smoothness and shadowmask sampling)
 - **Billboard** — `Sub_Billboard`, `Sub_BillboardBase`
 - **Vegetation wind** — `Sub_CalculateYWeightedOffset` with `Quadratic`, `Sine` and `Smoothstep` variants
+- **Motion** — `Sub_Move`, offset driven by `_Direction` and `_Speed`
 - **Terrain blending** — `Sub_CalculateTerrainUV`, `Sub_CalculateTerrainColor`
 - **Root shadow** — `Sub_RootShadowOS`, object-space root shadow mask for meshes whose UVs do not expand along the height axis
+- **Volumetric fog** — `Sub_Fog` (box-bounded ray march over `_boxCenter` / `_boxSize` with `_stepCount`, `_density`, `_noiseScale`), `Sub_HeightVolumeFog` (`_fogHeight` / `_fogHeightRange` / `_density`), `Sub_ValueNoise3D` (3D value noise)
+- **Space reconstruction** — `Sub_ReconstructWorldPosition` (world position from `uv` + depth via `UNITY_MATRIX_I_VP`), `Sub_ConstructNormal` (normal from three height samples via finite differences)
 - **Color correction** — `Sub_ElevateBlack`
 - **Color quantization** — `Sub_Posterize`
 
@@ -75,8 +81,9 @@ Reusable nodes in `SubGraphs/`, grouped by purpose:
 
 | File | Nodes |
 | --- | --- |
-| `HLSL/ToolNode.hlsl` | `BillboardBase`, `Billboard`, `CalculateYWeightedOffset` (plus `Quadratic` / `Sine` / `Smoothstep`), `CalculateTerrainUV`, `CalculateTerrainColor`, `RootShadowOS`, `Posterize` |
-| `HLSL/ColorCorrection.hlsl` | `ElevateBlack` — lifts and blends the dark parts of a color |
+| `HLSL/ToolNode.hlsl` | `BillboardBase`, `Billboard`, `CalculateYWeightedOffset` (plus `Quadratic` / `Sine` / `Smoothstep`), `CalculateTerrainUV`, `CalculateTerrainColor`, `RootShadowOS`, `ReconstructWorldPosition`, `ConstructNormal` |
+| `HLSL/ColorCorrection.hlsl` | `ElevateBlack` — lifts and blends the dark parts of a color; `Posterize` — colour quantization |
+| `HLSL/VolumetricScattering.hlsl` | `Fog`, `HeightVolumeFog`, `ValueNoise3D`, `RayBoxIntersection`, `RaySphereIntersect`, `BoundaryAttenuation`, `Hash31` — standalone ray-marching helpers for volumetric fog; not referenced by any graph yet |
 
 ### Third-party
 
@@ -112,4 +119,4 @@ these shaders, including commercially, as long as the copyright notice is kept.
 
 ## Notes
 
-- `.meta` files are not tracked in this repository (`*.meta` in `.gitignore`). Unity regenerates them on import, so asset GUIDs are assigned per project — copy the files you need rather than referencing them across projects.
+- `.meta` files are not tracked in this repository (`*.meta` in `.gitignore`). Unity regenerates them on import, so asset GUIDs are assigned per project — copy the files you need rather than referencing them across projects. Shader Graph references to Sub Graphs are resolved by GUID, so after importing you may need to re-pick the Sub Graph asset on any node that shows as missing.

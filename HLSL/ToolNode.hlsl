@@ -52,67 +52,49 @@ void BillboardBase_half(half3 positionOS, out half3 newPositionOS)
         cameraDirOS   * positionOS.z;
 }
 
-// 圆柱形 billboard(只在水平面上旋转)
-void Billboard_float(float3 positionOS, out float3 newPositionOS)
+/* 
+圆柱形 billboard(只在水平面上旋转)
+最小增量值在SubShader中处理
+*/
+void Billboard_float(float3 positionOS, float2 minIncrement, out float3 newPositionOS)
 {
-    float3 center = float3(0, 0, 0);
-
-    float3 cameraPosOS = TransformWorldToObject(_WorldSpaceCameraPos);
-
-    // 计算朝向相机的方向(newZ)
-    float3 cameraDirOS = normalize(cameraPosOS - center);
-
+    // 方向计算用 float，避免 float 精度不足
+    float3 cameraDirOS = TransformWorldToObject(_WorldSpaceCameraPos);
     cameraDirOS.y = 0;
-    cameraDirOS = normalize(cameraDirOS);
-    
-    // 去除竖直分量，使 billboard 只在水平面上旋转
-    // 避免除零，但不使用分支
-    float lengthSquared = max(dot(cameraDirOS, cameraDirOS), 0.0001);
-    cameraDirOS = cameraDirOS / sqrt(lengthSquared);
-    
-    // 竖直向上(tempY)
-    float3 upOS = float3(0, 1, 0);
 
-    // 向右的正方向(newX)
-    float3 rightOS = normalize(cross(upOS, cameraDirOS));
+    // 加微小偏移，规避摄像机正上方时的零向量
+    cameraDirOS.x += minIncrement.x;
+    cameraDirOS.z += minIncrement.y;
 
-    // 用叉乘计算出垂直于 cameraDirOS 的 rightOS 和 Up(即 newY)
-    float3 correctedUpOS = cross(cameraDirOS, rightOS);
+    cameraDirOS = normalize(cameraDirOS);   // 此时已安全
+
+    float3 upOS = float3(0, 1, 0);          // 竖直向上
+    float3 rightOS = normalize(cross(upOS, cameraDirOS));   // 向右的正方向(newX)
+    float3 correctedUpOS = cross(cameraDirOS, rightOS);     // 用叉乘计算出垂直于 cameraDirOS 的 rightOS 和 Up(即 newY)
 
     newPositionOS = 
-        center + 
         rightOS       * positionOS.x + 
         correctedUpOS * positionOS.y + 
         cameraDirOS   * positionOS.z;
 }
 
-void Billboard_half(half3 positionOS, out half3 newPositionOS)
+void Billboard_half(half3 positionOS, half2 minIncrement, out half3 newPositionOS)
 {
-    half3 center = half3(0, 0, 0);
-
-    half3 cameraPosOS = TransformWorldToObject(_WorldSpaceCameraPos);
-
-    // 计算朝向相机的方向(newZ)
-    half3 cameraDirOS = normalize(cameraPosOS - center);
-
+    // 方向计算用 half，避免 half 精度不足
+    half3 cameraDirOS = TransformWorldToObject(_WorldSpaceCameraPos);
     cameraDirOS.y = 0;
-    cameraDirOS = normalize(cameraDirOS);
 
-    // 去除竖直分量，使 billboard 只在水平面上旋转
-    half lengthSquared = max(dot(cameraDirOS, cameraDirOS), 0.0001);
-    cameraDirOS = cameraDirOS / sqrt(lengthSquared);
+    // 加微小偏移，规避摄像机正上方时的零向量
+    cameraDirOS.x += minIncrement.x;
+    cameraDirOS.z += minIncrement.y;
 
-    // 竖直向上(tempY)
-    half3 upOS = half3(0, 1, 0);
+    cameraDirOS = normalize(cameraDirOS);   // 此时已安全
 
-    // 向右的正方向(newX)
-    half3 rightOS = normalize(cross(upOS, cameraDirOS));
-
-    // 用叉乘计算出垂直于 cameraDirOS 的 rightOS 和 Up(即 newY)
-    half3 correctedUpOS = cross(cameraDirOS, rightOS);
+    half3 upOS = half3(0, 1, 0);          // 竖直向上
+    half3 rightOS = normalize(cross(upOS, cameraDirOS));   // 向右的正方向(newX)
+    half3 correctedUpOS = cross(cameraDirOS, rightOS);     // 用叉乘计算出垂直于 cameraDirOS 的 rightOS 和 Up(即 newY)
 
     newPositionOS = 
-        center + 
         rightOS       * positionOS.x + 
         correctedUpOS * positionOS.y + 
         cameraDirOS   * positionOS.z;
@@ -294,17 +276,52 @@ void RootShadowOS_half(half3 positionOS, half3 normalOS, half rootHeight, half f
     mask = saturate(rootMask * strength);
 }
 
-// 色阶(硬二分化)
-void Posterize_float(float gray, float levels, out float outPosterize)
+/*
+构建法线:
+1. 设高度函数为: y = H(x, z);
+2. 下一步是计算高度场沿X、Z方向的变化: &H/&x 和 &H/&z;
+3. 最后即可构造法线: N = normalize(-&H/&x, 1, -&H/&z);
+
+y = h(x, z)
+hx = 沿 x 轴方向，梯度积分 h，梯度步长为 epsilon
+hz = 沿 z 轴方向，梯度积分 h，梯度步长为 epsilon
+*/
+void ConstructNormal_float(float h, float hx, float hz, float epsilon, out float3 normalOS)
 {
-    float steps = levels - 1.0;
-    // 向下取整 / 步长
-    outPosterize = floor(gray * steps + 0.5) / steps;
+    // epsilon 特指积分的步长，但此处不求积分，因此 epsilon 可以取 0.01~0.1 左右的值，实现伪积分
+    float dx = (hx - h) / epsilon; // (delta_x)
+    float dz = (hz - h) / epsilon; // (delta_z)
+
+    normalOS = normalize(float3(-dx, 1.0, -dz));
 }
 
-void Posterize_half(half gray, half levels, out half outPosterize)
+void ConstructNormal_half(half h, half hx, half hz, half epsilon, out half3 normalOS)
 {
-    half steps = levels - 1.0;
-    outPosterize = floor(gray * steps + 0.5) / steps;
+    half dx = (hx - h) / epsilon;
+    half dz = (hz - h) / epsilon;
+
+    normalOS = normalize(half3(-dx, 1.0, -dz));
 }
+
+// 将NDC坐标转换为世界空间坐标
+void ReconstructWorldPosition_float(float2 uv, float depth, out float3 positionWS)
+{
+    positionWS = ComputeWorldSpacePosition(
+        uv,
+        depth,
+        UNITY_MATRIX_I_VP
+    );
+}
+
+void ReconstructWorldPosition_half(half2 uv, half depth, out half3 positionWS)
+{
+    positionWS = ComputeWorldSpacePosition(
+        uv,
+        depth,
+        UNITY_MATRIX_I_VP
+    );
+}
+
 #endif
+
+

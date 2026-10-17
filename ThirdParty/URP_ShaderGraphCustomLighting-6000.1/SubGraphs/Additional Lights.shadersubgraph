@@ -272,6 +272,9 @@
     "m_Guid": {
         "m_GuidSerialized": "69da1628-ab6b-4e6b-a7a5-36e3f72a90ec"
     },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
     "m_Name": "SpecularColour",
     "m_DefaultRefNameVersion": 0,
     "m_RefNameGeneratedByDisplayName": "",
@@ -285,6 +288,8 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -402,7 +407,8 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
-    }
+    },
+    "m_LiteralMode": false
 }
 
 {
@@ -426,7 +432,8 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
-    }
+    },
+    "m_LiteralMode": false
 }
 
 {
@@ -551,7 +558,8 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
-    }
+    },
+    "m_LiteralMode": false
 }
 
 {
@@ -630,10 +638,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1042.0,
-            "y": 313.0,
-            "width": 206.00006103515626,
-            "height": 131.00003051757813
+            "x": -1041.333251953125,
+            "y": 307.3332824707031,
+            "width": 207.33331298828126,
+            "height": 133.33334350585938
         }
     },
     "m_Slots": [
@@ -766,7 +774,8 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
-    }
+    },
+    "m_LiteralMode": false
 }
 
 {
@@ -783,7 +792,8 @@
     "m_DefaultValue": 0.0,
     "m_Labels": [
         "X"
-    ]
+    ],
+    "m_LiteralMode": false
 }
 
 {
@@ -865,8 +875,8 @@
     "m_ObjectId": "9b0d61612c014d83aff3b43cb1ba7686",
     "m_Title": "Normal",
     "m_Position": {
-        "x": -1066.9998779296875,
-        "y": 162.0
+        "x": -1066.66650390625,
+        "y": 159.99998474121095
     }
 }
 
@@ -877,6 +887,9 @@
     "m_Guid": {
         "m_GuidSerialized": "284b44e0-1015-48a8-8616-f694c3828512"
     },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
     "m_Name": "Shadowmask",
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Shadowmask",
@@ -890,6 +903,8 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
     "m_Value": {
         "x": 1.0,
         "y": 1.0,
@@ -937,10 +952,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -434.0000305175781,
-            "y": 463.0000305175781,
-            "width": 147.0,
-            "height": 34.0
+            "x": -434.00006103515627,
+            "y": 464.0,
+            "width": 148.0,
+            "height": 35.999969482421878
         }
     },
     "m_Slots": [
@@ -1027,10 +1042,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -952.9999389648438,
-            "y": 260.9999694824219,
-            "width": 115.0,
-            "height": 34.000030517578128
+            "x": -951.9998779296875,
+            "y": 255.33331298828126,
+            "width": 116.0,
+            "height": 35.999969482421878
         }
     },
     "m_Slots": [
@@ -1081,6 +1096,9 @@
     "m_Guid": {
         "m_GuidSerialized": "8b8a45c8-136e-436c-975f-285c4d757e00"
     },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
     "m_Name": "Smoothness",
     "m_DefaultRefNameVersion": 0,
     "m_RefNameGeneratedByDisplayName": "",
@@ -1094,12 +1112,25 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
     "m_Value": 0.0,
     "m_FloatType": 0,
+    "m_LiteralFloatMode": false,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    }
+    },
+    "m_SliderType": 0,
+    "m_SliderPower": 3.0,
+    "m_EnumType": 0,
+    "m_CSharpEnumString": "",
+    "m_EnumNames": [
+        "Default"
+    ],
+    "m_EnumValues": [
+        0
+    ]
 }
 
 {
@@ -1152,7 +1183,8 @@
     "m_DefaultValue": 0.0,
     "m_Labels": [
         "X"
-    ]
+    ],
+    "m_LiteralMode": false
 }
 
 {
@@ -1212,7 +1244,8 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
-    }
+    },
+    "m_LiteralMode": false
 }
 
 {
@@ -1317,10 +1350,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -812.9999389648438,
-            "y": 221.00001525878907,
-            "width": 208.0,
-            "height": 326.0
+            "x": -810.6665649414063,
+            "y": 219.3332977294922,
+            "width": 207.33331298828126,
+            "height": 143.99998474121095
         }
     },
     "m_Slots": [
@@ -1339,7 +1372,7 @@
     ],
     "synonyms": [],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -1354,6 +1387,9 @@
     "m_Guid": {
         "m_GuidSerialized": "4be13597-d820-4587-ab11-daf353790d60"
     },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
     "m_Name": "Normal",
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Normal",
@@ -1367,6 +1403,8 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
     "m_Value": {
         "x": 0.0,
         "y": 0.0,

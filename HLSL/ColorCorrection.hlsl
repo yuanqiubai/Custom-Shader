@@ -16,4 +16,18 @@ void ElevateBlack_half(half3 Color, half BlackCompression, out half3 Out)
     Out = newColor;
 }
 
+// 色阶(硬二分化)
+void Posterize_float(float gray, float levels, out float outPosterize)
+{
+    float steps = levels - 1.0;
+    // 向下取整 / 步长
+    outPosterize = floor(gray * steps + 0.5) / steps;
+}
+
+void Posterize_half(half gray, half levels, out half outPosterize)
+{
+    half steps = levels - 1.0;
+    outPosterize = floor(gray * steps + 0.5) / steps;
+}
+
 #endif
